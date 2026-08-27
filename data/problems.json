@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "slug": "two-sum",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/two-sum/",
+    "description": "Dado un array de enteros nums y un entero target, devolver los índices de los dos números que suman target. Se asume que existe exactamente una solución y no se puede usar el mismo elemento dos veces.",
+    "solution": "public class Solution {\n    public int[] TwoSum(int[] nums, int target) {\n        var seen = new Dictionary<int, int>();\n        for (int i = 0; i < nums.Length; i++) {\n            int complement = target - nums[i];\n            if (seen.TryGetValue(complement, out int idx)) {\n                return new int[] { idx, i };\n            }\n            seen[nums[i]] = i;\n        }\n        return Array.Empty<int>();\n    }\n}",
+    "explanation": "Un diccionario guarda cada valor visto junto a su índice. Por cada número se busca si su complemento (target - num) ya apareció antes, logrando O(n) en vez de O(n²)."
+  },
+  {
+    "id": 2,
+    "title": "Reverse Integer",
+    "slug": "reverse-integer",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/reverse-integer/",
+    "description": "Dado un entero de 32 bits con signo x, devolver x con sus dígitos invertidos. Si el resultado se sale del rango de un entero de 32 bits, devolver 0.",
+    "solution": "public class Solution {\n    public int Reverse(int x) {\n        long result = 0;\n        while (x != 0) {\n            int digit = x % 10;\n            x /= 10;\n            result = result * 10 + digit;\n            if (result > int.MaxValue || result < int.MinValue) {\n                return 0;\n            }\n        }\n        return (int)result;\n    }\n}",
+    "explanation": "Se acumula el resultado en un long para detectar overflow de 32 bits antes de convertir de vuelta a int, evitando que el propio cálculo desborde."
+  },
+  {
+    "id": 3,
+    "title": "Palindrome Number",
+    "slug": "palindrome-number",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/palindrome-number/",
+    "description": "Dado un entero x, devolver true si x es un número palíndromo, es decir, si se lee igual al derecho y al revés.",
+    "solution": "public class Solution {\n    public bool IsPalindrome(int x) {\n        if (x < 0) return false;\n        long original = x;\n        long reversed = 0;\n        long n = x;\n        while (n != 0) {\n            reversed = reversed * 10 + n % 10;\n            n /= 10;\n        }\n        return reversed == original;\n    }\n}",
+    "explanation": "Los números negativos nunca son palíndromos. Para el resto, se invierten los dígitos usando long para evitar overflow y se compara contra el original."
+  },
+  {
+    "id": 4,
+    "title": "Valid Parentheses",
+    "slug": "valid-parentheses",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/valid-parentheses/",
+    "description": "Dado un string s que contiene solo los caracteres '(', ')', '{', '}', '[' y ']', determinar si el string es válido: cada paréntesis abierto se cierra con el mismo tipo y en el orden correcto.",
+    "solution": "public class Solution {\n    public bool IsValid(string s) {\n        var stack = new Stack<char>();\n        var pairs = new Dictionary<char, char> { { ')', '(' }, { ']', '[' }, { '}', '{' } };\n        foreach (char c in s) {\n            if (pairs.ContainsValue(c)) {\n                stack.Push(c);\n            } else if (pairs.ContainsKey(c)) {\n                if (stack.Count == 0 || stack.Pop() != pairs[c]) {\n                    return false;\n                }\n            }\n        }\n        return stack.Count == 0;\n    }\n}",
+    "explanation": "Una pila guarda los símbolos de apertura. Al encontrar un cierre, debe coincidir con el tope de la pila; si no coincide o la pila está vacía, el string es inválido."
+  },
+  {
+    "id": 5,
+    "title": "Merge Two Sorted Lists",
+    "slug": "merge-two-sorted-lists",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "description": "Dadas las cabezas de dos listas enlazadas ordenadas, fusionarlas en una sola lista ordenada y devolver su cabeza.",
+    "solution": "public class ListNode {\n    public int val;\n    public ListNode next;\n    public ListNode(int val = 0, ListNode next = null) {\n        this.val = val;\n        this.next = next;\n    }\n}\n\npublic class Solution {\n    public ListNode MergeTwoLists(ListNode l1, ListNode l2) {\n        var dummy = new ListNode(0);\n        var current = dummy;\n        while (l1 != null && l2 != null) {\n            if (l1.val <= l2.val) {\n                current.next = l1;\n                l1 = l1.next;\n            } else {\n                current.next = l2;\n                l2 = l2.next;\n            }\n            current = current.next;\n        }\n        current.next = l1 ?? l2;\n        return dummy.next;\n    }\n}",
+    "explanation": "Se usa un nodo dummy y un puntero current que siempre enlaza el nodo más chico entre l1 y l2. Al terminar uno de los dos, se cuelga el resto del otro."
+  },
+  {
+    "id": 6,
+    "title": "Remove Duplicates from Sorted Array",
+    "slug": "remove-duplicates-from-sorted-array",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+    "description": "Dado un array ordenado nums, eliminar los duplicados in-place de forma que cada elemento único aparezca una sola vez, y devolver la nueva longitud.",
+    "solution": "public class Solution {\n    public int RemoveDuplicates(int[] nums) {\n        if (nums.Length == 0) return 0;\n        int k = 1;\n        for (int i = 1; i < nums.Length; i++) {\n            if (nums[i] != nums[k - 1]) {\n                nums[k] = nums[i];\n                k++;\n            }\n        }\n        return k;\n    }\n}",
+    "explanation": "Dos punteros: k marca la posición del próximo elemento único, i recorre el array. Como está ordenado, basta comparar contra el último elemento único escrito."
+  },
+  {
+    "id": 7,
+    "title": "Maximum Subarray",
+    "slug": "maximum-subarray",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/maximum-subarray/",
+    "description": "Dado un array de enteros nums, encontrar el subarray contiguo (con al menos un elemento) que tenga la mayor suma, y devolver esa suma.",
+    "solution": "public class Solution {\n    public int MaxSubArray(int[] nums) {\n        int maxSum = nums[0];\n        int currentSum = nums[0];\n        for (int i = 1; i < nums.Length; i++) {\n            currentSum = Math.Max(nums[i], currentSum + nums[i]);\n            maxSum = Math.Max(maxSum, currentSum);\n        }\n        return maxSum;\n    }\n}",
+    "explanation": "Algoritmo de Kadane: en cada posición se decide si conviene extender el subarray actual o empezar uno nuevo desde ese elemento, guardando el máximo visto."
+  },
+  {
+    "id": 8,
+    "title": "Climbing Stairs",
+    "slug": "climbing-stairs",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/climbing-stairs/",
+    "description": "Se están subiendo n escalones. En cada paso se puede subir 1 o 2 escalones. Determinar de cuántas formas distintas se puede llegar arriba.",
+    "solution": "public class Solution {\n    public int ClimbStairs(int n) {\n        if (n <= 2) return n;\n        int prev = 1, curr = 2;\n        for (int i = 3; i <= n; i++) {\n            int next = prev + curr;\n            prev = curr;\n            curr = next;\n        }\n        return curr;\n    }\n}",
+    "explanation": "El número de formas de llegar al escalón n es la suma de las formas de llegar a n-1 y n-2 (equivalente a Fibonacci), calculado de forma iterativa en O(n)."
+  },
+  {
+    "id": 9,
+    "title": "Best Time to Buy and Sell Stock",
+    "slug": "best-time-to-buy-and-sell-stock",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "description": "Dado un array prices donde prices[i] es el precio de una acción en el día i, maximizar la ganancia eligiendo un día para comprar y otro (posterior) para vender.",
+    "solution": "public class Solution {\n    public int MaxProfit(int[] prices) {\n        int minPrice = int.MaxValue;\n        int maxProfit = 0;\n        foreach (int price in prices) {\n            if (price < minPrice) {\n                minPrice = price;\n            } else if (price - minPrice > maxProfit) {\n                maxProfit = price - minPrice;\n            }\n        }\n        return maxProfit;\n    }\n}",
+    "explanation": "Se recorre el array una sola vez llevando el precio mínimo visto hasta el momento y actualizando la ganancia máxima posible si se vendiera hoy."
+  },
+  {
+    "id": 10,
+    "title": "Single Number",
+    "slug": "single-number",
+    "difficulty": "Easy",
+    "leetcode_url": "https://leetcode.com/problems/single-number/",
+    "description": "Dado un array de enteros no vacío donde cada elemento aparece dos veces excepto uno, encontrar ese elemento único.",
+    "solution": "public class Solution {\n    public int SingleNumber(int[] nums) {\n        int result = 0;\n        foreach (int num in nums) {\n            result ^= num;\n        }\n        return result;\n    }\n}",
+    "explanation": "XOR entre un número y sí mismo da 0, y XOR con 0 no cambia el valor. Al aplicar XOR sobre todo el array, los pares se cancelan y queda el único."
+  },
+  {
+    "id": 11,
+    "title": "Add Two Numbers",
+    "slug": "add-two-numbers",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/add-two-numbers/",
+    "description": "Dos números no negativos representados como listas enlazadas en orden inverso, donde cada nodo contiene un dígito. Sumar los dos números y devolver el resultado como lista enlazada.",
+    "solution": "public class ListNode {\n    public int val;\n    public ListNode next;\n    public ListNode(int val = 0, ListNode next = null) {\n        this.val = val;\n        this.next = next;\n    }\n}\n\npublic class Solution {\n    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {\n        var dummy = new ListNode(0);\n        var current = dummy;\n        int carry = 0;\n        while (l1 != null || l2 != null || carry != 0) {\n            int sum = carry;\n            if (l1 != null) { sum += l1.val; l1 = l1.next; }\n            if (l2 != null) { sum += l2.val; l2 = l2.next; }\n            carry = sum / 10;\n            current.next = new ListNode(sum % 10);\n            current = current.next;\n        }\n        return dummy.next;\n    }\n}",
+    "explanation": "Se suman los dígitos posición por posición junto con el acarreo (carry), igual que una suma manual, generando un nuevo nodo por cada dígito del resultado."
+  },
+  {
+    "id": 12,
+    "title": "Longest Substring Without Repeating Characters",
+    "slug": "longest-substring-without-repeating-characters",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+    "description": "Dado un string s, encontrar la longitud del substring más largo sin caracteres repetidos.",
+    "solution": "public class Solution {\n    public int LengthOfLongestSubstring(string s) {\n        var lastIndex = new Dictionary<char, int>();\n        int maxLength = 0;\n        int start = 0;\n        for (int i = 0; i < s.Length; i++) {\n            char c = s[i];\n            if (lastIndex.TryGetValue(c, out int prevIndex) && prevIndex >= start) {\n                start = prevIndex + 1;\n            }\n            lastIndex[c] = i;\n            maxLength = Math.Max(maxLength, i - start + 1);\n        }\n        return maxLength;\n    }\n}",
+    "explanation": "Ventana deslizante: se mantiene el índice de la última aparición de cada carácter. Si un carácter se repite dentro de la ventana actual, el inicio salta justo después de esa aparición previa."
+  },
+  {
+    "id": 13,
+    "title": "3Sum",
+    "slug": "3sum",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/3sum/",
+    "description": "Dado un array de enteros nums, devolver todos los tripletes únicos [nums[i], nums[j], nums[k]] tales que i != j != k y su suma sea 0.",
+    "solution": "public class Solution {\n    public IList<IList<int>> ThreeSum(int[] nums) {\n        Array.Sort(nums);\n        var result = new List<IList<int>>();\n        for (int i = 0; i < nums.Length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.Length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    result.Add(new List<int> { nums[i], nums[left], nums[right] });\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++;\n                    right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return result;\n    }\n}",
+    "explanation": "Con el array ordenado, se fija un número y se buscan los otros dos con dos punteros desde los extremos. Saltar valores repetidos evita tripletes duplicados en el resultado."
+  },
+  {
+    "id": 14,
+    "title": "Group Anagrams",
+    "slug": "group-anagrams",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/group-anagrams/",
+    "description": "Dado un array de strings, agrupar los anagramas juntos. Se puede devolver el resultado en cualquier orden.",
+    "solution": "public class Solution {\n    public IList<IList<string>> GroupAnagrams(string[] strs) {\n        var groups = new Dictionary<string, List<string>>();\n        foreach (var str in strs) {\n            var chars = str.ToCharArray();\n            Array.Sort(chars);\n            var key = new string(chars);\n            if (!groups.ContainsKey(key)) {\n                groups[key] = new List<string>();\n            }\n            groups[key].Add(str);\n        }\n        return groups.Values.Select(g => (IList<string>)g).ToList();\n    }\n}",
+    "explanation": "Dos strings son anagramas si sus caracteres ordenados son iguales. Esa versión ordenada se usa como clave de un diccionario para agrupar los strings originales."
+  },
+  {
+    "id": 15,
+    "title": "Longest Palindromic Substring",
+    "slug": "longest-palindromic-substring",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/longest-palindromic-substring/",
+    "description": "Dado un string s, devolver el substring palíndromo más largo dentro de s.",
+    "solution": "public class Solution {\n    public string LongestPalindrome(string s) {\n        if (string.IsNullOrEmpty(s)) return \"\";\n        int start = 0, maxLength = 1;\n\n        void Expand(int left, int right) {\n            while (left >= 0 && right < s.Length && s[left] == s[right]) {\n                if (right - left + 1 > maxLength) {\n                    start = left;\n                    maxLength = right - left + 1;\n                }\n                left--;\n                right++;\n            }\n        }\n\n        for (int i = 0; i < s.Length; i++) {\n            Expand(i, i);\n            Expand(i, i + 1);\n        }\n        return s.Substring(start, maxLength);\n    }\n}",
+    "explanation": "Se expande desde cada posible centro (par o impar) hacia afuera mientras los caracteres coincidan, guardando el palíndromo más largo encontrado."
+  },
+  {
+    "id": 16,
+    "title": "Product of Array Except Self",
+    "slug": "product-of-array-except-self",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/product-of-array-except-self/",
+    "description": "Dado un array nums, devolver un array answer tal que answer[i] sea el producto de todos los elementos de nums excepto nums[i], sin usar el operador de división y en O(n).",
+    "solution": "public class Solution {\n    public int[] ProductExceptSelf(int[] nums) {\n        int n = nums.Length;\n        int[] result = new int[n];\n        result[0] = 1;\n        for (int i = 1; i < n; i++) {\n            result[i] = result[i - 1] * nums[i - 1];\n        }\n        int rightProduct = 1;\n        for (int i = n - 1; i >= 0; i--) {\n            result[i] *= rightProduct;\n            rightProduct *= nums[i];\n        }\n        return result;\n    }\n}",
+    "explanation": "Se calcula primero el producto de todos los elementos a la izquierda de cada posición, y luego se multiplica por el producto acumulado de los elementos a la derecha, sin usar división."
+  },
+  {
+    "id": 17,
+    "title": "Rotate Image",
+    "slug": "rotate-image",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/rotate-image/",
+    "description": "Dada una matriz n x n que representa una imagen, rotarla 90 grados en sentido horario in-place.",
+    "solution": "public class Solution {\n    public void Rotate(int[][] matrix) {\n        int n = matrix.Length;\n        for (int i = 0; i < n; i++) {\n            for (int j = i + 1; j < n; j++) {\n                (matrix[i][j], matrix[j][i]) = (matrix[j][i], matrix[i][j]);\n            }\n        }\n        for (int i = 0; i < n; i++) {\n            Array.Reverse(matrix[i]);\n        }\n    }\n}",
+    "explanation": "Rotar 90° en sentido horario equivale a transponer la matriz (intercambiar filas por columnas) y luego invertir cada fila, todo hecho in-place."
+  },
+  {
+    "id": 18,
+    "title": "Coin Change",
+    "slug": "coin-change",
+    "difficulty": "Medium",
+    "leetcode_url": "https://leetcode.com/problems/coin-change/",
+    "description": "Dado un array de denominaciones de monedas coins y un monto total amount, devolver la cantidad mínima de monedas necesarias para completar ese monto, o -1 si no es posible.",
+    "solution": "public class Solution {\n    public int CoinChange(int[] coins, int amount) {\n        int[] dp = new int[amount + 1];\n        Array.Fill(dp, amount + 1);\n        dp[0] = 0;\n        for (int i = 1; i <= amount; i++) {\n            foreach (int coin in coins) {\n                if (coin <= i) {\n                    dp[i] = Math.Min(dp[i], dp[i - coin] + 1);\n                }\n            }\n        }\n        return dp[amount] > amount ? -1 : dp[amount];\n    }\n}",
+    "explanation": "Programación dinámica bottom-up: dp[i] guarda el mínimo de monedas para formar el monto i, calculado a partir de subproblemas menores (i - coin) ya resueltos."
+  },
+  {
+    "id": 19,
+    "title": "Median of Two Sorted Arrays",
+    "slug": "median-of-two-sorted-arrays",
+    "difficulty": "Hard",
+    "leetcode_url": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+    "description": "Dados dos arrays ordenados nums1 y nums2 de tamaños m y n, devolver la mediana de los dos arrays combinados, en O(log(m+n)).",
+    "solution": "public class Solution {\n    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {\n        if (nums1.Length > nums2.Length) {\n            return FindMedianSortedArrays(nums2, nums1);\n        }\n        int m = nums1.Length, n = nums2.Length;\n        int low = 0, high = m;\n        int half = (m + n + 1) / 2;\n\n        while (low <= high) {\n            int cut1 = (low + high) / 2;\n            int cut2 = half - cut1;\n\n            int left1 = cut1 == 0 ? int.MinValue : nums1[cut1 - 1];\n            int left2 = cut2 == 0 ? int.MinValue : nums2[cut2 - 1];\n            int right1 = cut1 == m ? int.MaxValue : nums1[cut1];\n            int right2 = cut2 == n ? int.MaxValue : nums2[cut2];\n\n            if (left1 <= right2 && left2 <= right1) {\n                if ((m + n) % 2 == 0) {\n                    return (Math.Max(left1, left2) + Math.Min(right1, right2)) / 2.0;\n                }\n                return Math.Max(left1, left2);\n            } else if (left1 > right2) {\n                high = cut1 - 1;\n            } else {\n                low = cut1 + 1;\n            }\n        }\n        throw new ArgumentException(\"Los arrays de entrada no están ordenados.\");\n    }\n}",
+    "explanation": "Búsqueda binaria sobre el array más chico para encontrar un corte (partición) tal que todos los elementos a la izquierda de ambos arrays combinados sean menores o iguales a los de la derecha."
+  },
+  {
+    "id": 20,
+    "title": "Merge k Sorted Lists",
+    "slug": "merge-k-sorted-lists",
+    "difficulty": "Hard",
+    "leetcode_url": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "description": "Dado un array de k listas enlazadas, cada una ordenada, fusionarlas en una sola lista ordenada y devolverla.",
+    "solution": "public class ListNode {\n    public int val;\n    public ListNode next;\n    public ListNode(int val = 0, ListNode next = null) {\n        this.val = val;\n        this.next = next;\n    }\n}\n\npublic class Solution {\n    public ListNode MergeKLists(ListNode[] lists) {\n        var queue = new PriorityQueue<ListNode, int>();\n        foreach (var node in lists) {\n            if (node != null) {\n                queue.Enqueue(node, node.val);\n            }\n        }\n\n        var dummy = new ListNode(0);\n        var current = dummy;\n        while (queue.Count > 0) {\n            var node = queue.Dequeue();\n            current.next = node;\n            current = current.next;\n            if (node.next != null) {\n                queue.Enqueue(node.next, node.next.val);\n            }\n        }\n        return dummy.next;\n    }\n}",
+    "explanation": "Una cola de prioridad (min-heap) mantiene siempre accesible el nodo más chico entre las cabezas de las k listas. Requiere .NET 6+ por el uso de PriorityQueue."
+  },
+  {
+    "id": 21,
+    "title": "Trapping Rain Water",
+    "slug": "trapping-rain-water",
+    "difficulty": "Hard",
+    "leetcode_url": "https://leetcode.com/problems/trapping-rain-water/",
+    "description": "Dado un array de enteros no negativos que representa un mapa de elevación donde el ancho de cada barra es 1, calcular cuánta agua de lluvia queda atrapada después de llover.",
+    "solution": "public class Solution {\n    public int Trap(int[] height) {\n        int left = 0, right = height.Length - 1;\n        int leftMax = 0, rightMax = 0;\n        int water = 0;\n        while (left < right) {\n            if (height[left] <= height[right]) {\n                leftMax = Math.Max(leftMax, height[left]);\n                water += leftMax - height[left];\n                left++;\n            } else {\n                rightMax = Math.Max(rightMax, height[right]);\n                water += rightMax - height[right];\n                right--;\n            }\n        }\n        return water;\n    }\n}",
+    "explanation": "Dos punteros desde los extremos: el agua atrapada en una posición depende del menor entre el máximo a su izquierda y el máximo a su derecha, así que se avanza siempre desde el lado con menor altura máxima."
+  },
+  {
+    "id": 22,
+    "title": "N-Queens",
+    "slug": "n-queens",
+    "difficulty": "Hard",
+    "leetcode_url": "https://leetcode.com/problems/n-queens/",
+    "description": "Dado un entero n, devolver todas las formas distintas de ubicar n reinas en un tablero de ajedrez n x n de modo que ninguna reina ataque a otra.",
+    "solution": "public class Solution {\n    public IList<IList<string>> SolveNQueens(int n) {\n        var results = new List<IList<string>>();\n        var columns = new HashSet<int>();\n        var diagonals = new HashSet<int>();\n        var antiDiagonals = new HashSet<int>();\n        var board = new int[n];\n\n        void Backtrack(int row) {\n            if (row == n) {\n                var solution = new List<string>();\n                for (int r = 0; r < n; r++) {\n                    var rowChars = new char[n];\n                    Array.Fill(rowChars, '.');\n                    rowChars[board[r]] = 'Q';\n                    solution.Add(new string(rowChars));\n                }\n                results.Add(solution);\n                return;\n            }\n            for (int col = 0; col < n; col++) {\n                int diag = row - col;\n                int antiDiag = row + col;\n                if (columns.Contains(col) || diagonals.Contains(diag) || antiDiagonals.Contains(antiDiag)) {\n                    continue;\n                }\n                columns.Add(col);\n                diagonals.Add(diag);\n                antiDiagonals.Add(antiDiag);\n                board[row] = col;\n\n                Backtrack(row + 1);\n\n                columns.Remove(col);\n                diagonals.Remove(diag);\n                antiDiagonals.Remove(antiDiag);\n            }\n        }\n\n        Backtrack(0);\n        return results;\n    }\n}",
+    "explanation": "Backtracking fila por fila: se prueba cada columna válida para la reina actual, marcando columnas y diagonales ocupadas, y se retrocede cuando ninguna posición de una fila es viable."
+  }
+]

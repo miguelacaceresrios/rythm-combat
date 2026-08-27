@@ -1,0 +1,21 @@
+{
+  "daily_exercises": {
+    "distribution": {
+      "Easy": 1,
+      "Medium": 1,
+      "Hard": 1
+    }
+  },
+  "output": {
+    "solutions_dir": "solutions",
+    "readme_path": "README.md"
+  },
+  "git": {
+    "auto_commit": true,
+    "auto_push": true,
+    "remote": "origin",
+    "branch": "main",
+    "user_name": "DailyCodingBot",
+    "user_email": "dailycodingbot@users.noreply.github.com"
+  }
+}

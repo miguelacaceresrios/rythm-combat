@@ -1,0 +1,2 @@
+# Sin dependencias externas: el bot usa solo la librería estándar de Python
+# (json, random, subprocess, pathlib, datetime, textwrap).
