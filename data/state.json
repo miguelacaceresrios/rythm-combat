@@ -1,11 +1,14 @@
 {
-  "last_run": "2026-08-27",
+  "last_run": "2026-08-28",
   "used_ids": [
     6,
+    9,
     11,
-    19
+    13,
+    19,
+    21
   ],
-  "total_solved": 3,
+  "total_solved": 6,
   "history": [
     {
       "date": "2026-08-27",
@@ -30,6 +33,32 @@
           "slug": "median-of-two-sorted-arrays",
           "difficulty": "Hard",
           "leetcode_url": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "problems": [
+        {
+          "id": 9,
+          "title": "Best Time to Buy and Sell Stock",
+          "slug": "best-time-to-buy-and-sell-stock",
+          "difficulty": "Easy",
+          "leetcode_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+        },
+        {
+          "id": 13,
+          "title": "3Sum",
+          "slug": "3sum",
+          "difficulty": "Medium",
+          "leetcode_url": "https://leetcode.com/problems/3sum/"
+        },
+        {
+          "id": 21,
+          "title": "Trapping Rain Water",
+          "slug": "trapping-rain-water",
+          "difficulty": "Hard",
+          "leetcode_url": "https://leetcode.com/problems/trapping-rain-water/"
         }
       ]
     }
