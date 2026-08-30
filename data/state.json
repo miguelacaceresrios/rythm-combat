@@ -1,17 +1,20 @@
 {
-  "last_run": "2026-08-29",
+  "last_run": "2026-08-30",
   "used_ids": [
     4,
     6,
     9,
+    10,
     11,
     13,
     14,
+    17,
     19,
     20,
-    21
+    21,
+    22
   ],
-  "total_solved": 9,
+  "total_solved": 12,
   "history": [
     {
       "date": "2026-08-27",
@@ -88,6 +91,32 @@
           "slug": "merge-k-sorted-lists",
           "difficulty": "Hard",
           "leetcode_url": "https://leetcode.com/problems/merge-k-sorted-lists/"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-30",
+      "problems": [
+        {
+          "id": 10,
+          "title": "Single Number",
+          "slug": "single-number",
+          "difficulty": "Easy",
+          "leetcode_url": "https://leetcode.com/problems/single-number/"
+        },
+        {
+          "id": 17,
+          "title": "Rotate Image",
+          "slug": "rotate-image",
+          "difficulty": "Medium",
+          "leetcode_url": "https://leetcode.com/problems/rotate-image/"
+        },
+        {
+          "id": 22,
+          "title": "N-Queens",
+          "slug": "n-queens",
+          "difficulty": "Hard",
+          "leetcode_url": "https://leetcode.com/problems/n-queens/"
         }
       ]
     }
