@@ -1,25 +1,28 @@
 {
-  "last_run": "2026-09-02",
+  "last_run": "2026-09-03",
   "used_ids": [
     1,
     2,
     3,
     4,
     6,
+    8,
     9,
     10,
     11,
+    12,
     13,
     14,
     15,
     16,
     17,
     18,
+    19,
     20,
     21,
     22
   ],
-  "total_solved": 21,
+  "total_solved": 24,
   "history": [
     {
       "date": "2026-08-27",
@@ -200,6 +203,32 @@
           "slug": "merge-k-sorted-lists",
           "difficulty": "Hard",
           "leetcode_url": "https://leetcode.com/problems/merge-k-sorted-lists/"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "problems": [
+        {
+          "id": 8,
+          "title": "Climbing Stairs",
+          "slug": "climbing-stairs",
+          "difficulty": "Easy",
+          "leetcode_url": "https://leetcode.com/problems/climbing-stairs/"
+        },
+        {
+          "id": 12,
+          "title": "Longest Substring Without Repeating Characters",
+          "slug": "longest-substring-without-repeating-characters",
+          "difficulty": "Medium",
+          "leetcode_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+        },
+        {
+          "id": 19,
+          "title": "Median of Two Sorted Arrays",
+          "slug": "median-of-two-sorted-arrays",
+          "difficulty": "Hard",
+          "leetcode_url": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
         }
       ]
     }
