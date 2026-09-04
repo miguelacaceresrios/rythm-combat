@@ -1,28 +1,19 @@
 {
-  "last_run": "2026-09-03",
+  "last_run": "2026-09-04",
   "used_ids": [
     1,
     2,
     3,
     4,
     6,
+    7,
     8,
     9,
     10,
-    11,
-    12,
-    13,
-    14,
     15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22
+    21
   ],
-  "total_solved": 24,
+  "total_solved": 27,
   "history": [
     {
       "date": "2026-08-27",
@@ -229,6 +220,32 @@
           "slug": "median-of-two-sorted-arrays",
           "difficulty": "Hard",
           "leetcode_url": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "problems": [
+        {
+          "id": 7,
+          "title": "Maximum Subarray",
+          "slug": "maximum-subarray",
+          "difficulty": "Easy",
+          "leetcode_url": "https://leetcode.com/problems/maximum-subarray/"
+        },
+        {
+          "id": 15,
+          "title": "Longest Palindromic Substring",
+          "slug": "longest-palindromic-substring",
+          "difficulty": "Medium",
+          "leetcode_url": "https://leetcode.com/problems/longest-palindromic-substring/"
+        },
+        {
+          "id": 21,
+          "title": "Trapping Rain Water",
+          "slug": "trapping-rain-water",
+          "difficulty": "Hard",
+          "leetcode_url": "https://leetcode.com/problems/trapping-rain-water/"
         }
       ]
     }
